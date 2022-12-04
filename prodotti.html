@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GoodGrowth - Financial Services HTML Template</title>
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <!-- GOOGLE WEB FONTS -->
+  <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,latin-ext' rel='stylesheet'
+    type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,100,300,700,900&subset=latin,latin-ext' rel='stylesheet'
+    type='text/css'>
+  <!-- END OF GOOGLE WEB FONTS -->
+
+  <!-- BOOTSTRAP & STYLES -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="css/block_grid_bootstrap.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/typicons.min.css" rel="stylesheet">
+  <link href="css/odometer-theme-default.css" rel="stylesheet">
+  <link href="css/animate-custom.css" rel="stylesheet">
+  <link href="css/owl.carousel.css" rel="stylesheet">
+  <link href="css/owl.theme.default.min.css" rel="stylesheet">
+  <link href="css/magnific-popup.css" rel="stylesheet">
+  <link href="css/slicknav.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <!-- END OF BOOTSTRAP & STYLES -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $(function () {
+      $("#menu").load("./menu.html");
+    });
+  </script>
+  <script>
+    $(function () {
+      $("#footer").load("./footer.html");
+    });
+  </script>
+</head>
+
+<body>
+  <!-- HEADER -->
+
+  <div id="hw-hero">
+    <section id="menu" style="padding-bottom: 0px; padding-top: 0px;"></section>
+
+    <!-- PAGE HEADER -->
+    <div id="page-header" class="single-project-2">
+      <div class="title-breadcrumbs">
+        <h1>I NOSTRI PRODOTTI</h1>
+      </div>
+
+    </div>
+    <!-- END OF PAGE HEADER -->
+  </div>
+
+  <section class="single-project-2">
+
+    <div class="row custom-width-90">
+      <div class="col-sm-12">
+
+        <div id="single-project-carousel">
+          <div class="item"><a href="images/prodotti/img1-1.jpg" class="lightbox"><img
+                src="images/prodotti/img1-1.jpg" alt=""></a></div>
+          <div class="item"><a href="images/prodotti/img1-2.jpg" class="lightbox"><img
+                src="images/prodotti/img1-2.jpg" alt=""></a></div>
+          <div class="item"><a href="images/prodotti/img1-3.jpg" class="lightbox"><img
+                src="images/prodotti/img1-3.jpg" alt=""></a></div>
+          <div class="item"><a href="images/prodotti/img1-4.jpg" class="lightbox"><img
+                src="images/prodotti/img1-4.jpg" alt=""></a></div>
+          <div class="item"><a href="images/prodotti/img1-5.jpg" class="lightbox"><img
+                src="images/prodotti/img1-5.jpg" alt=""></a></div>
+          <div class="item"><a href="images/prodotti/img1-6.jpg" class="lightbox"><img
+                src="images/prodotti/img1-6.jpg" alt=""></a></div>
+          <div class="item"><a href="images/prodotti/img1-7.jpg" class="lightbox"><img
+                src="images/prodotti/img1-7.jpg" alt=""></a></div>
+          <div class="item"><a href="images/prodotti/img1-8.jpg" class="lightbox"><img
+                src="images/prodotti/img1-8.jpg" alt=""></a></div>
+          <div class="item"><a href="images/prodotti/img1-9.jpg" class="lightbox"><img
+                src="images/prodotti/img1-9.jpg" alt=""></a></div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="shadow-effect">
+
+              <div class="single-project-elements elements">
+                <h4>I NOSTRI PRODOTTI</h4>
+                <hr class="small" />
+
+                <p>Offriamo una vasta gamma di cofani e urne, con differenti lavorazioni e materiali, tra cui poter
+                  scegliere secondo i propri desideri e le proprie disponibilità.
+                  Presso la nostra sede è possibile trovare un’esposizione con alcune delle possibili soluzioni, con una
+                  chiara indicazione dei prezzi.
+                </p>
+                <p>Disponiamo inoltre di numerosi allestimenti per le camere ardenti, adatti a soddisfare qualsiasi
+                  vostra preferenza, e di autofunebri di ultima generazione per cerimonie e trasporti.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="footer" style="padding-bottom: 0px;"></section>
+
+
+  <!-- JAVASCRIPT FILES -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.hoverIntent.js"></script>
+  <script src="js/superfish.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/odometer.min.js"></script>
+  <script src="js/waypoints.min.js"></script>
+  <script src="js/jquery.slicknav.min.js"></script>
+  <script src="js/wow.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/retina.min.js"></script>
+  <script src="js/custom.js"></script>
+  <!-- END OF JAVASCRIPT FILES -->
+
+  <script>
+    jQuery(document).ready(function ($) {
+      "use strict";
+
+      //  HEADER SLIDER HOOK
+      $('#single-project-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        responsive: {
+          0: {
+            items: 1,
+            dots: false
+          },
+          600: {
+            items: 3
+          },
+          1100: {
+            items: 5
+          }
+        }
+      })
+    });
+
+    $('.lightbox').magnificPopup({
+      type: 'image',
+      gallery: {
+        enabled: true
+      },
+      retina: {
+        ratio: 1,
+        replaceSrc: function (item, ratio) {
+          return item.src.replace(/\.\w+$/, function (m) { return '@2x' + m; });
+        } // function that changes image source
+      }
+    });
+
+  </script>
+
+</body>
+
+</html>

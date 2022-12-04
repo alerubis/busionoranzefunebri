@@ -1,50 +1,222 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busi Onoranze Funebri</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GoodGrowth - Financial Services HTML Template</title>
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <!-- GOOGLE WEB FONTS -->
+  <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,latin-ext' rel='stylesheet'
+    type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,100,300,700,900&subset=latin,latin-ext' rel='stylesheet'
+    type='text/css'>
+  <!-- END OF GOOGLE WEB FONTS -->
+
+  <!-- BOOTSTRAP & STYLES -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="css/block_grid_bootstrap.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/typicons.min.css" rel="stylesheet">
+  <link href="css/odometer-theme-default.css" rel="stylesheet">
+  <link href="css/animate-custom.css" rel="stylesheet">
+  <link href="css/owl.carousel.css" rel="stylesheet">
+  <link href="css/owl.theme.default.min.css" rel="stylesheet">
+  <link href="css/slicknav.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <!-- END OF BOOTSTRAP & STYLES -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+  $(function(){
+    $("#menu").load("./menu.html");
+  });
+</script>
+<script>
+   $(function(){
+     $("#footer").load("./footer.html");
+   });
+ </script>
 </head>
+
 <body>
-    <a href="index.php">Index</a>
-    <a href="annunci.php">Elenco annunci</a>
-    <a href="admin.php">Admin</a>
-    <h1>Dettaglio annuncio</h1>
+  <!-- HEADER -->
 
-    <!-- Caricamento annuncio -->
-    <?php
-        if (isset($_GET['id'])) {
-            $db = new PDO("sqlite:database/busionoranzefunebri.db");
-            $q = "SELECT * FROM annuncio WHERE id = :id";
-            $prepare = $db->prepare($q);
-            $prepare->bindValue(':id', $_GET['id']);
-            $prepare->execute();
-            $annuncio = $prepare->fetch();
-            $db = null;
-        }
-    ?>
+  <div id="hw-hero">
+    <section id="menu" style="padding-bottom: 0px; padding-top: 0px;"></section>
 
-    <?php if($annuncio) : ?>
+ <!-- PAGE HEADER -->
+    <div id="page-header">
+   <div class="title-breadcrumbs">
+   <h1>ANNUNCI FUNEBRI</h1>
+   <div class="thebreadcumb">
+   </div>
+   </div>
 
-        <!-- Dettaglio annuncio -->
-        <div>
-            <label for="id">id</label>
-            <input type="text" id="id" name="id" disabled value="<?php echo (isset($annuncio['id']))?$annuncio['id']:'';?>">
-            <br>
-            <label for="nome">nome</label>
-            <input type="text" id="nome" name="nome" value="<?php echo (isset($annuncio['nome']))?$annuncio['nome']:'';?>">
+    </div>
+    <!-- END OF PAGE HEADER -->
+  </div>
+
+  <!-- Caricamento annuncio -->
+  <?php
+    if (isset($_GET['id'])) {
+      $db = new PDO("sqlite:database/busionoranzefunebri.db");
+      $q = "SELECT * FROM annuncio WHERE id = :id";
+      $prepare = $db->prepare($q);
+      $prepare->bindValue(':id', $_GET['id']);
+      $prepare->execute();
+      $annuncio = $prepare->fetch();
+      $db = null;
+    }
+  ?>
+
+  <?php if($annuncio) : ?>
+
+    <!-- Dettaglio annuncio -->
+    <section class="content shortcodes">
+      <div class="row">
+        <div class="col-sm-12" style="text-align: center;">
+
+          <!-- Columns -->
+          <div class="row" style="text-align: center;">
+            <div class="col-sm-8">
+              <p>Mettimi come sigillo<br>
+                sul tuo cuore..."<br>
+                Ct. 8,6</p>
+              <p>Ci ha lasciato il nostro caro</p>
+              <div>
+                <img style="padding-left: 35%;padding-right: 35%;" src="images/foto.jpg" alt="" />
+              </div>
+              <p><b><?php echo $annuncio['nome']?></b><br>di 19 anni</p>
+              <p >Ne danno il triste annuncio la moglie Rosa Maria, le figlie con rispettive famiglie.<br>
+                Il nostro caro si trova presso la camera mortuaria della Casa di Cura Palazzolo di Bergamo.<br>
+                I funerali si svolgeranno Venerdì 2 Dicembre alle ore 10,30 presso la Parrocchia di S. Tomaso Apostolo a
+                Bergamo.<br>
+                Si ringraziano anticipatamente quanti interverranno alla mesta cerimonia.<br>
+              </p>
+              <p style="text-align: left;">Bergamo, 30 novembre 2022<br>
+                O.F. Busi, 0345-99490</p>
+            </div>
+            <div class="col-sm-4">
+              <section class="contact-form">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h3>Lascia il tuo <span>messaggio</span> di cordoglio alla famiglia </h3>
+                    <hr class="small" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div id="sendstatus"></div>
+
+                    <div id="contactform">
+                      <form method="post" action="sendmail.php">
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <p><input type="text" placeholder="Nome" class="form-control" name="name" id="name"
+                                tabindex="1" /></p>
+                            <p><input type="text" placeholder="Cognome" class="form-control" name="email" id="email"
+                                tabindex="2" /></p>
+                            <p><input type="text" placeholder="Email" class="form-control" name="phone" id="phone"
+                                tabindex="3" /></p>
+                            <p><textarea placeholder="Messaggio" class="form-control" name="comments" id="comments"
+                                tabindex="4"></textarea></p>
+                            <p style="text-align: left;">
+                              <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"> Desidero che il cordoglio
+                              sia visibile solo alla famiglia
+                            </p>
+                            <p><input name="submit" type="submit" id="submit" class="submit" value="Invia" tabindex="5" />
+                            </p>
+                          </div>
+                          <div class="col-sm-6">
+
+                          </div>
+                        </div>
+                      </form>
+
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
         </div>
-
-    <?php else : ?>
-
-        <!-- Annuncio non trovato -->
-        <div>
-            Annuncio non trovato
+        <hr class="long" />
+        <div class="row  spacing-40">
+          <div class="col-sm-12">
+            <div class="col-sm-6" style="text-align: left;">
+              <p><b>Alessandro Salvi</b></p>
+            </div>
+            <div class="col-sm-6" style="text-align: right;">12 dicembre 2022</div>
+            <div class="col-sm-12">
+              <p>ciao mi chiamo alessandro questa è una prova bla bla bla ciao ciaociao mi chiamo alessandro questa è una
+                prova bla bla bla ciao ciaociao mi chiamo alessandro questa è ua bla ciao ciaociao</p>
+            </div>
+          </div>
         </div>
+        <hr class="long" />
+        <div class="row  spacing-40">
+          <div class="col-sm-12">
+            <div class="col-sm-6" style="text-align: left;">
+              <p><b>Alessandro Salvi</b></p>
+            </div>
+            <div class="col-sm-6" style="text-align: right;">12 dicembre 2022</div>
+            <div class="col-sm-12">
+              <p>ciao mi chiamo alessandro questa è una prova bla bla bla ciao ciaociao mi chiamo alessandro questa è una
+                prova bla bla bla ciaciao</p>
+            </div>
+          </div>
+        </div>
+        <hr class="long" />
+        <div class="row  spacing-40">
+          <div class="col-sm-12">
+            <div class="col-sm-6" style="text-align: left;">
+              <p><b>Alessandro Salvi</b></p>
+            </div>
+            <div class="col-sm-6" style="text-align: right;">12 dicembre 2022</div>
+            <div class="col-sm-12">
+              <p>ciao mi chiamo alessandro questa è una prova bla bla bla o mi chiamo alessandro questa è una
+                prova bla bla bla ciao ciaociao mi chiamo alessandro questa è una prova bla bla bla ciao ciaociao</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <?php endif; ?>
+  <?php else : ?>
+
+    <!-- Annuncio non trovato -->
+    <section class="introtext error404">
+      <div class="row">
+        <div class="col-sm-12">
+          <h2>404</h2>
+          <hr class="small">
+          <h5>Annuncio non trovato</h5>
+        </div>
+      </div>
+    </section>
+
+  <?php endif; ?>
+
+  <div class="spacing-45"></div>
+
+  <section id="footer" style="padding-bottom: 0px;"></section>
+
+
+  <!-- JAVASCRIPT FILES -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.hoverIntent.js"></script>
+  <script src="js/superfish.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/odometer.min.js"></script>
+  <script src="js/waypoints.min.js"></script>
+  <script src="js/jquery.slicknav.min.js"></script>
+  <script src="js/wow.min.js"></script>
+  <script src="js/retina.min.js"></script>
+  <script src="js/custom.js"></script>
+  <!-- END OF JAVASCRIPT FILES -->
 
 </body>
+
 </html>

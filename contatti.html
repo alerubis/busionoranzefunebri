@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GoodGrowth - Financial Services HTML Template</title>
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <!-- GOOGLE WEB FONTS -->
+  <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,latin-ext' rel='stylesheet'
+    type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,100,300,700,900&subset=latin,latin-ext' rel='stylesheet'
+    type='text/css'>
+  <!-- END OF GOOGLE WEB FONTS -->
+
+  <!-- BOOTSTRAP & STYLES -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="css/block_grid_bootstrap.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/typicons.min.css" rel="stylesheet">
+  <link href="css/odometer-theme-default.css" rel="stylesheet">
+  <link href="css/animate-custom.css" rel="stylesheet">
+  <link href="css/owl.carousel.css" rel="stylesheet">
+  <link href="css/owl.theme.default.min.css" rel="stylesheet">
+  <link href="css/slicknav.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <!-- END OF BOOTSTRAP & STYLES -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+  $(function(){
+    $("#menu").load("./menu.html");
+  });
+</script>
+<script>
+   $(function(){
+     $("#footer").load("./footer.html");
+   });
+ </script>
+</head>
+
+<body>
+  <!-- HEADER -->
+
+  <div id="hw-hero">
+    <section id="menu" style="padding-bottom: 0px; padding-top: 0px;"></section>
+
+ <!-- PAGE HEADER -->
+    <div id="page-header">
+   <div class="title-breadcrumbs">
+   <h1>CONTATTI</h1>
+   <div class="thebreadcumb">
+   </div>
+   </div>
+
+    </div>
+    <!-- END OF PAGE HEADER -->
+  </div>
+
+
+  <!--  FORM -->
+  <section class="contact-form">
+    <div class="row">
+      <div class="col-sm-12">
+        <hr class="small" />
+        <h2><span>CONTATTACI</span></h2>
+        <hr class="small" />
+        <p style="text-align: center;">
+          Vi invitiamo a richiederci un preventivo completo, gratuitamente e senza impegno, per valutare il costo complessivo del servizio. I nostri responsabili vi aiuteranno nelle scelte necessarie, presso i nostri uffici o fissando telefonicamente un incontro.
+          <br><br>I costi del servizio variano in funzione delle componenti richieste, dei prodotti scelti e delle modalità di sepoltura.
+          <br><br>Potete contattarci al numero 0345/99490, via e-mail all’indirizzo info@busionoranzefunebri.it, attraverso il modulo sottostante o visitando la nostra sede, sita in via Libertà, 26 – 24012 Val Brembilla (BG).          
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="sendstatus"></div>
+
+        <div id="contactform">
+          <form method="post" action="sendmail.php">
+            <div class="row">
+              <div class="col-sm-12">
+                <p> <input type="text" placeholder="Nome" class="form-control" name="name" id="name"
+                    tabindex="1" /></p>
+                <p><input type="text" placeholder="Cognome" class="form-control" name="email" id="email"
+                    tabindex="2" /></p>
+                <p><input type="text" placeholder="Numero di telefono" class="form-control" name="phone"
+                    id="phone" tabindex="3" /></p>
+                    <p> <textarea class="form-control" color=#28CB75 placeholder="Messaggio" name="comments" id="comments"
+                      tabindex="4"></textarea></p>
+              </div>
+
+            </div>
+            <p><input name="submit" type="submit" id="submit" class="submit" value="Send" tabindex="5" /></p>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--  END OF FORM -->
+
+
+
+  <section id="footer" style="padding-bottom: 0px;"></section>
+
+  <!-- JAVASCRIPT FILES -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/contact-script.js"></script>
+  <script src="js/jquery.hoverIntent.js"></script>
+  <script src="js/superfish.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/odometer.min.js"></script>
+  <script src="js/waypoints.min.js"></script>
+  <script src="js/jquery.slicknav.min.js"></script>
+  <script src="js/wow.min.js"></script>
+  <script src="js/retina.min.js"></script>
+  <script src="js/custom.js"></script>
+  <!-- END OF JAVASCRIPT FILES -->
+
+  <script>
+    function initMap() {
+      var mapDiv = document.getElementById('map_canvas');
+      var myLatLng = { lat: 40.698752, lng: -112.032163 };
+      var map = new google.maps.Map(mapDiv, {
+        center: myLatLng,
+        zoom: 10,
+        scrollwheel: false,
+        draggable: false,
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+          style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+          position: google.maps.ControlPosition.TOP_RIGHT
+        },
+        zoomControl: true,
+        zoomControlOptions: {
+          position: google.maps.ControlPosition.LEFT_TOP
+        },
+        scaleControl: true,
+        streetViewControl: true,
+        streetViewControlOptions: {
+          position: google.maps.ControlPosition.LEFT_TOP
+        }
+
+      });
+      var image = 'images/map-pin.png';
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        icon: image
+      });
+      marker.addListener('click', function () {
+        infowindow.open(map, marker);
+      });
+
+
+      var contentString = '<div id="content">' +
+        '<h4>Good Growth</h4>' +
+        '<div id="bodyContent">' +
+        '<p>Completely synthesize principle-centered information after ethical communities.</p></div>';
+
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      map.set('styles', [{ "featureType": "administrative", "elementType": "all", "stylers": [{ "visibility": "on" }, { "lightness": 33 }] }, { "featureType": "administrative", "elementType": "labels", "stylers": [{ "saturation": "-100" }] }, { "featureType": "administrative", "elementType": "labels.text", "stylers": [{ "gamma": "0.75" }] }, { "featureType": "administrative.neighborhood", "elementType": "labels.text.fill", "stylers": [{ "lightness": "-37" }] }, { "featureType": "landscape", "elementType": "geometry", "stylers": [{ "color": "#f9f9f9" }] }, { "featureType": "landscape.man_made", "elementType": "geometry", "stylers": [{ "saturation": "-100" }, { "lightness": "40" }, { "visibility": "off" }] }, { "featureType": "landscape.natural", "elementType": "labels.text.fill", "stylers": [{ "saturation": "-100" }, { "lightness": "-37" }] }, { "featureType": "landscape.natural", "elementType": "labels.text.stroke", "stylers": [{ "saturation": "-100" }, { "lightness": "100" }, { "weight": "2" }] }, { "featureType": "landscape.natural", "elementType": "labels.icon", "stylers": [{ "saturation": "-100" }] }, { "featureType": "poi", "elementType": "geometry", "stylers": [{ "saturation": "-100" }, { "lightness": "80" }] }, { "featureType": "poi", "elementType": "labels", "stylers": [{ "saturation": "-100" }, { "lightness": "0" }] }, { "featureType": "poi.attraction", "elementType": "geometry", "stylers": [{ "lightness": "-4" }, { "saturation": "-100" }] }, { "featureType": "poi.park", "elementType": "geometry", "stylers": [{ "color": "#c5dac6" }, { "visibility": "on" }, { "saturation": "-95" }, { "lightness": "62" }] }, { "featureType": "poi.park", "elementType": "labels", "stylers": [{ "visibility": "on" }, { "lightness": 20 }] }, { "featureType": "road", "elementType": "all", "stylers": [{ "lightness": 20 }] }, { "featureType": "road", "elementType": "labels", "stylers": [{ "saturation": "-100" }, { "gamma": "1.00" }] }, { "featureType": "road", "elementType": "labels.text", "stylers": [{ "gamma": "0.50" }] }, { "featureType": "road", "elementType": "labels.icon", "stylers": [{ "saturation": "-100" }, { "gamma": "0.50" }] }, { "featureType": "road.highway", "elementType": "geometry", "stylers": [{ "color": "#c5c6c6" }, { "saturation": "-100" }] }, { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{ "lightness": "-13" }] }, { "featureType": "road.highway", "elementType": "labels.icon", "stylers": [{ "lightness": "0" }, { "gamma": "1.09" }] }, { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{ "color": "#e4d7c6" }, { "saturation": "-100" }, { "lightness": "47" }] }, { "featureType": "road.arterial", "elementType": "geometry.stroke", "stylers": [{ "lightness": "-12" }] }, { "featureType": "road.arterial", "elementType": "labels.icon", "stylers": [{ "saturation": "-100" }] }, { "featureType": "road.local", "elementType": "geometry", "stylers": [{ "color": "#fbfaf7" }, { "lightness": "77" }] }, { "featureType": "road.local", "elementType": "geometry.fill", "stylers": [{ "lightness": "-5" }, { "saturation": "-100" }] }, { "featureType": "road.local", "elementType": "geometry.stroke", "stylers": [{ "saturation": "-100" }, { "lightness": "-15" }] }, { "featureType": "transit.station.airport", "elementType": "geometry", "stylers": [{ "lightness": "47" }, { "saturation": "-100" }] }, { "featureType": "water", "elementType": "all", "stylers": [{ "visibility": "on" }, { "color": "#acbcc9" }] }, { "featureType": "water", "elementType": "geometry", "stylers": [{ "saturation": "53" }] }, { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{ "lightness": "-42" }, { "saturation": "17" }] }, { "featureType": "water", "elementType": "labels.text.stroke", "stylers": [{ "lightness": "61" }] }]);
+
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBa0XKgzJB_erM0hBHbdrjaFB_KQMuRoDY&callback=initMap"
+    async defer></script>
+
+</body>
+
+</html>
