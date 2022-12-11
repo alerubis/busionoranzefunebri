@@ -76,7 +76,7 @@
               <div class="block-grid-item finance">
                 <a href="annuncio.php?id=<?php echo $annuncio['id']?>" title="">
                   <figure>
-                    <img style="padding-left: 20%;padding-right: 20%;" src="images/logo.png" alt="" />
+                    <img style="padding-left: 20%;padding-right: 20%;" src="data:image/jpeg;base64,<?php echo base64_encode($annuncio['foto'])?>" alt="" />
                     <figcaption >
                       <div class="fig-overlay" >
                       </div>

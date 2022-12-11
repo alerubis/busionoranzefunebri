@@ -80,22 +80,23 @@
           <!-- Columns -->
           <div class="row" style="text-align: center;">
             <div class="col-sm-8">
-              <p>Mettimi come sigillo<br>
-                sul tuo cuore..."<br>
-                Ct. 8,6</p>
-              <p>Ci ha lasciato il nostro caro</p>
-              <div>
-                <img style="padding-left: 35%;padding-right: 35%;" src="images/foto.jpg" alt="" />
-              </div>
-              <p><b><?php echo $annuncio['nome']?></b><br>di 19 anni</p>
-              <p >Ne danno il triste annuncio la moglie Rosa Maria, le figlie con rispettive famiglie.<br>
-                Il nostro caro si trova presso la camera mortuaria della Casa di Cura Palazzolo di Bergamo.<br>
-                I funerali si svolgeranno Venerdì 2 Dicembre alle ore 10,30 presso la Parrocchia di S. Tomaso Apostolo a
-                Bergamo.<br>
-                Si ringraziano anticipatamente quanti interverranno alla mesta cerimonia.<br>
+              <p style="white-space: pre-line;">
+                <?php echo $annuncio['citazione']?>
               </p>
-              <p style="text-align: left;">Bergamo, 30 novembre 2022<br>
-                O.F. Busi, 0345-99490</p>
+              <p style="white-space: pre-line;">
+                <?php echo $annuncio['apertura']?>
+              </p>
+              <div>
+                <img style="padding-left: 35%;padding-right: 35%;" src="data:image/jpeg;base64,<?php echo base64_encode($annuncio['foto'])?>" alt="" />
+              </div>
+              <p><b><?php echo $annuncio['nome']?></b><br>di <?php echo $annuncio['eta']?> anni</p>
+              <p style="white-space: pre-line;">
+                <?php echo $annuncio['testo']?>
+              </p>
+              <p style="text-align: left;">
+                Bergamo, <?php echo $annuncio['data']?><br>
+                O.F. Busi, 0345-99490
+              </p>
             </div>
             <div class="col-sm-4">
               <section class="contact-form">

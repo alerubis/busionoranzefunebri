@@ -63,37 +63,66 @@
         $db = null;
     ?>
 
-    <section class="services1">
+    <div class="content shop-cart">
         <div class="row">
             <div class="col-sm-12">
 
-                <a href="annuncio_create.php">
-                    Aggiungi nuovo annuncio
-                </a>
+                <div class="row">
+                    <div class="col-12">
+                        <a href="annuncio_create.php">
+                            <button class="btn" type="submit" value="Modifica annuncio">
+                                <i class="fa fa-plus" style="margin-right: 12px;"></i>
+                                Aggiungi nuovo annuncio
+                            </button>
+                        </a>
+                    </div>
+                </div>
 
-                <table>
-                    <tr>
-                    <th>Id</th>
-                    <th>Nome</th>
-                    <th>Azioni</th>
-                    </tr>
-                    <?php
-                    foreach ($annunci as $annuncio):?>
-                    <tr>
-                        <td><?php echo $annuncio['id']?></td>
-                        <td><?php echo $annuncio['nome']?></td>
-                        <td>
-                        <a href="annuncio_update.php?id=<?php echo $annuncio['id'];?>">Modifica</a>
-                        |
-                        <a href="annuncio_delete.php?id=<?php echo $annuncio['id'];?>" onclick="return confirm('Sei sicuro?');">Elimina</a>
-                        </td>
-                    </tr>
-                    <?php endforeach;?>
-                </table>
+                <br>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Foto</th>
+                                <th>Nome</th>
+                                <th>Età</th>
+                                <th>Paese</th>
+                                <th>Citazione</th>
+                                <th>Apertura</th>
+                                <th>Testo</th>
+                                <th>Data</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($annunci as $annuncio):?>
+                            <tr>
+                                <td><?php echo $annuncio['id']?></td>
+                                <td><img src="data:image/jpeg;base64,<?php echo base64_encode($annuncio['foto'])?>"></td>
+                                <td><?php echo $annuncio['nome']?></td>
+                                <td><?php echo $annuncio['eta']?></td>
+                                <td><?php echo $annuncio['paese']?></td>
+                                <td><?php echo $annuncio['citazione']?></td>
+                                <td><?php echo $annuncio['apertura']?></td>
+                                <td><?php echo $annuncio['testo']?></td>
+                                <td><?php echo $annuncio['data']?></td>
+                                <td>
+                                <a href="annuncio_update.php?id=<?php echo $annuncio['id'];?>">Modifica</a>
+                                |
+                                <a href="annuncio_delete.php?id=<?php echo $annuncio['id'];?>" onclick="return confirm('Sei sicuro?');">Elimina</a>
+                                </td>
+                            </tr>
+                            <?php endforeach;?>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
         </div>
-    </section>
+    </div>
 
     <div class="spacing-45"></div>
 

@@ -26,15 +26,15 @@
     <!-- END OF BOOTSTRAP & STYLES -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-    $(function(){
-        $("#menu").load("./menu.html");
-    });
-</script>
-<script>
-    $(function(){
-        $("#footer").load("./footer.html");
-    });
- </script>
+        $(function(){
+            $("#menu").load("./menu.html");
+        });
+    </script>
+    <script>
+        $(function(){
+            $("#footer").load("./footer.html");
+        });
+    </script>
 </head>
 
 <body>
@@ -46,59 +46,157 @@
 
         <!-- PAGE HEADER -->
         <div id="page-header">
-        <div class="title-breadcrumbs">
-            <h1>ADMIN</h1>
-            <div class="thebreadcumb"></div>
-        </div>
+            <div class="title-breadcrumbs">
+                <h1>MODIFICA ANNUNCIO</h1>
+                <div class="thebreadcumb"></div>
+            </div>
         </div>
 
     </div>
 
+    <!-- Caricamento annuncio -->
     <?php
-        $db = new PDO("sqlite:database/busionoranzefunebri.db");
-        $q = "SELECT * FROM annuncio ORDER BY id DESC";
-        $prepare = $db->prepare($q);
-        $prepare->execute();
-        $annunci = $prepare->fetchAll();
-        $db = null;
+        if (isset($_GET['id'])) {
+            $db = new PDO("sqlite:database/busionoranzefunebri.db");
+            $q = "SELECT * FROM annuncio WHERE id = :id";
+            $prepare = $db->prepare($q);
+            $prepare->bindValue(':id', $_GET['id']);
+            $prepare->execute();
+            $annuncio = $prepare->fetch();
+            $db = null;
+        }
     ?>
 
-    <section class="services1">
+    <?php
+        if (isset($_POST['submit_data'])) {
+            $db = new PDO("sqlite:database/busionoranzefunebri.db");
+            $q = "UPDATE annuncio SET nome=:nome,eta=:eta,paese=:paese,citazione=:citazione,apertura=:apertura,testo=:testo,data=:data WHERE id=:id";
+            if (isset($_FILES['foto']) && file_exists($_FILES['foto']['tmp_name']) && is_uploaded_file($_FILES['foto']['tmp_name'])) {
+                $q = "UPDATE annuncio SET nome=:nome,eta=:eta,paese=:paese,citazione=:citazione,apertura=:apertura,foto=:foto,testo=:testo,data=:data WHERE id=:id";
+            }
+            $prepare = $db->prepare($q);
+            $prepare->bindValue(':id', $_POST['id']);
+            $prepare->bindValue(':nome', $_POST['nome']);
+            $prepare->bindValue(':eta', $_POST['eta']);
+            $prepare->bindValue(':paese', $_POST['paese']);
+            $prepare->bindValue(':citazione', $_POST['citazione']);
+            $prepare->bindValue(':apertura', $_POST['apertura']);
+            if (isset($_FILES['foto']) && file_exists($_FILES['foto']['tmp_name']) && is_uploaded_file($_FILES['foto']['tmp_name'])) {
+                $fotoContent = file_get_contents($_FILES['foto']['tmp_name']);
+                $prepare->bindValue(':foto', $fotoContent);
+            }
+            $prepare->bindValue(':testo', $_POST['testo']);
+            $prepare->bindValue(':data', $_POST['data']);
+            $prepare->execute();
+            $annuncio = $prepare->fetch();
+            $db = null;
+            header('Location: admin.php');
+            die();
+        }
+
+        if (isset($_POST['annulla'])) {
+            header('Location: admin.php');
+            die();
+        }
+    ?>
+
+    <div class="content shop-cart">
         <div class="row">
             <div class="col-sm-12">
 
-                <!-- Caricamento annuncio -->
-                <?php
-                    if (isset($_GET['id'])) {
-                        $db = new PDO("sqlite:database/busionoranzefunebri.db");
-                        $q = "SELECT * FROM annuncio WHERE id = :id";
-                        $prepare = $db->prepare($q);
-                        $prepare->bindValue(':id', $_GET['id']);
-                        $prepare->execute();
-                        $annuncio = $prepare->fetch();
-                        $db = null;
-                    }
-                ?>
-
                 <?php if($annuncio) : ?>
 
-                    <!-- Form modifica annuncio -->
-                    <form action="annuncio_update.php" method="post">
+                    <form action="annuncio_update.php" method="post" enctype="multipart/form-data">
 
-                        <label for="nome">Id:</label>
-                        <input id="id" name="id" type="text" value="<?php echo $annuncio['id'];?>" readonly>
+                        <p style="display: none">
+                            <label for="id">Id</label>
+                            <input id="id" name="id" type="text" readonly class="form-control" value="<?php echo $annuncio['id'];?>">
+                        </p>
 
-                        <br>
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <img style="height: 64px;" src="data:image/jpeg;base64,<?php echo base64_encode($annuncio['foto'])?>">
+                            </div>
+                            <div class="col-sm-11">
+                                <p>
+                                    <label for="foto">Foto</label>
+                                    <input id="foto" name="foto" type="file" class="form-control">
+                                </p>
+                            </div>
+                        </div>
 
-                        <label for="nome">Nome:</label>
-                        <input id="nome" name="nome" type="text" value="<?php echo $annuncio['nome'];?>">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p>
+                                    <label for="nome">Nome</label>
+                                    <input id="nome" name="nome" type="text" class="form-control" value="<?php echo $annuncio['nome'];?>">
+                                </p>
+                            </div>
+                            <div class="col-sm-2">
+                                <p>
+                                    <label for="eta">Età</label>
+                                    <input id="eta" name="eta" type="number" class="form-control" value="<?php echo $annuncio['eta'];?>">
+                                </p>
+                            </div>
+                            <div class="col-sm-3">
+                                <p>
+                                    <label for="paese">Paese</label>
+                                    <input id="paese" name="paese" type="text" class="form-control" value="<?php echo $annuncio['paese'];?>">
+                                </p>
+                            </div>
+                            <div class="col-sm-3">
+                                <p>
+                                    <label for="data">Data</label>
+                                    <input id="data" name="data" type="date" class="form-control" value="<?php echo $annuncio['data'];?>">
+                                </p>
+                            </div>
+                        </div>
 
-                        <br>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p>
+                                    <label for="citazione">Citazione</label>
+                                    <textarea id="citazione" name="citazione" type="text" class="form-control" rows="3"><?php echo $annuncio['citazione'];?></textarea>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p>
+                                    <label for="apertura">Apertura</label>
+                                    <textarea id="apertura" name="apertura" type="text" class="form-control" rows="3"><?php echo $annuncio['apertura'];?></textarea>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p>
+                                    <label for="testo">Testo</label>
+                                    <textarea id="testo" name="testo" type="text" class="form-control" rows="3"><?php echo $annuncio['testo'];?></textarea>
+                                </p>
+                            </div>
+                        </div>
 
                         <!-- Prevent implicit submission of the form -->
                         <button type="submit" disabled style="display: none" aria-hidden="true"></button>
 
-                        <input name="submit_data" type="submit" value="Modifica annuncio">
+                        <br>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button class="btn btn-default" name="annulla" type="submit" value="Annulla">
+                                    Annulla
+                                </button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn" name="submit_data" type="submit" value="Modifica annuncio">
+                                    <i class="fa fa-edit" style="margin-right: 12px;"></i>
+                                    Modifica annuncio
+                                </button>
+                            </div>
+                        </div>
 
                     </form>
 
@@ -111,43 +209,28 @@
 
                 <?php endif; ?>
 
-                <?php
-                    if (isset($_POST['submit_data'])) {
-                        $db = new PDO("sqlite:database/busionoranzefunebri.db");
-                        $q = "UPDATE annuncio SET nome = :nome WHERE id = :id";
-                        $prepare = $db->prepare($q);
-                        $prepare->bindValue(':id', $_POST['id']);
-                        $prepare->bindValue(':nome', $_POST['nome']);
-                        $prepare->execute();
-                        $annuncio = $prepare->fetch();
-                        $db = null;
-                        header('Location: admin.php');
-                        die();
-                    }
-                ?>
-
-                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <div class="spacing-45"></div>
+    <div class="spacing-45"></div>
 
-        <section id="footer" style="padding-bottom: 0px;"></section>
+    <section id="footer" style="padding-bottom: 0px;"></section>
 
-        <!-- JAVASCRIPT FILES -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.hoverIntent.js"></script>
-        <script src="js/superfish.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/odometer.min.js"></script>
-        <script src="js/waypoints.min.js"></script>
-        <script src="js/jquery.slicknav.min.js"></script>
-        <script src="js/wow.min.js"></script>
-        <script src="js/retina.min.js"></script>
-        <script src="js/custom.js"></script>
-        <!-- END OF JAVASCRIPT FILES -->
+    <!-- JAVASCRIPT FILES -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.hoverIntent.js"></script>
+    <script src="js/superfish.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/odometer.min.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.slicknav.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/retina.min.js"></script>
+    <script src="js/custom.js"></script>
+    <!-- END OF JAVASCRIPT FILES -->
 
-    </body>
+</body>
 
-    </html>
+</html>
