@@ -70,6 +70,19 @@
     }
   ?>
 
+  <!-- Caricamento messaggi -->
+  <?php
+    if (isset($_GET['id'])) {
+      $db = new PDO("sqlite:database/busionoranzefunebri.db");
+      $q = "SELECT * FROM messaggio WHERE id_annuncio=:id AND visibile='si' ORDER BY data DESC";
+      $prepare = $db->prepare($q);
+      $prepare->bindValue(':id', $_GET['id']);
+      $prepare->execute();
+      $messaggi = $prepare->fetchAll();
+      $db = null;
+    }
+  ?>
+
   <?php if($annuncio) : ?>
 
     <!-- Dettaglio annuncio -->
@@ -111,20 +124,16 @@
                     <div id="sendstatus"></div>
 
                     <div id="contactform">
-                      <form method="post" action="sendmail.php">
+                      <form method="post" action="annuncio_add_messaggio.php?id=<?php echo $annuncio['id'];?>">
                         <div class="row">
                           <div class="col-sm-12">
-                            <p><input type="text" placeholder="Nome" class="form-control" name="name" id="name"
-                                tabindex="1" /></p>
-                            <p><input type="text" placeholder="Cognome" class="form-control" name="email" id="email"
-                                tabindex="2" /></p>
-                            <p><input type="text" placeholder="Email" class="form-control" name="phone" id="phone"
-                                tabindex="3" /></p>
-                            <p><textarea placeholder="Messaggio" class="form-control" name="comments" id="comments"
-                                tabindex="4"></textarea></p>
+                            <p><input type="text" placeholder="Nome" class="form-control" name="nome" id="nome" tabindex="1" /></p>
+                            <p><input type="text" placeholder="Cognome" class="form-control" name="cognome" id="cognome" tabindex="2" /></p>
+                            <p><input type="text" placeholder="Email" class="form-control" name="email" id="email" tabindex="3" /></p>
+                            <p><textarea placeholder="Messaggio" class="form-control" name="testo" id="testo" tabindex="4"></textarea></p>
                             <p style="text-align: left;">
-                              <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"> Desidero che il cordoglio
-                              sia visibile solo alla famiglia
+                              <input type="checkbox" id="visibile" name="visibile" value="si">
+                              Desidero che il cordoglio sia visibile solo alla famiglia
                             </p>
                             <p><input name="submit" type="submit" id="submit" class="submit" value="Invia" tabindex="5" />
                             </p>
@@ -142,45 +151,25 @@
             </div>
           </div>
         </div>
-        <hr class="long" />
-        <div class="row  spacing-40">
-          <div class="col-sm-12">
-            <div class="col-sm-6" style="text-align: left;">
-              <p><b>Alessandro Salvi</b></p>
-            </div>
-            <div class="col-sm-6" style="text-align: right;">12 dicembre 2022</div>
+        <?php
+        foreach ($messaggi as $messaggio):?>
+          <hr class="long" />
+          <div class="row  spacing-40">
             <div class="col-sm-12">
-              <p>ciao mi chiamo alessandro questa è una prova bla bla bla ciao ciaociao mi chiamo alessandro questa è una
-                prova bla bla bla ciao ciaociao mi chiamo alessandro questa è ua bla ciao ciaociao</p>
+              <div class="col-sm-6" style="text-align: left;">
+                <p><b><?php echo $messaggio['nome']?> <?php echo $messaggio['cognome']?></b></p>
+              </div>
+              <div class="col-sm-6" style="text-align: right;">
+                <?php echo $messaggio['data']?>
+              </div>
+              <div class="col-sm-12">
+                <p>
+                  <?php echo $messaggio['testo']?>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <hr class="long" />
-        <div class="row  spacing-40">
-          <div class="col-sm-12">
-            <div class="col-sm-6" style="text-align: left;">
-              <p><b>Alessandro Salvi</b></p>
-            </div>
-            <div class="col-sm-6" style="text-align: right;">12 dicembre 2022</div>
-            <div class="col-sm-12">
-              <p>ciao mi chiamo alessandro questa è una prova bla bla bla ciao ciaociao mi chiamo alessandro questa è una
-                prova bla bla bla ciaciao</p>
-            </div>
-          </div>
-        </div>
-        <hr class="long" />
-        <div class="row  spacing-40">
-          <div class="col-sm-12">
-            <div class="col-sm-6" style="text-align: left;">
-              <p><b>Alessandro Salvi</b></p>
-            </div>
-            <div class="col-sm-6" style="text-align: right;">12 dicembre 2022</div>
-            <div class="col-sm-12">
-              <p>ciao mi chiamo alessandro questa è una prova bla bla bla o mi chiamo alessandro questa è una
-                prova bla bla bla ciao ciaociao mi chiamo alessandro questa è una prova bla bla bla ciao ciaociao</p>
-            </div>
-          </div>
-        </div>
+        <?php endforeach;?>
       </div>
     </section>
 
