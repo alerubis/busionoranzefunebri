@@ -1,3 +1,20 @@
+<?php
+    /* Your password */
+    $password = 'MYPASS';
+
+    /* Redirects here after login */
+    $redirect_after_login = 'admin.php';
+
+    /* Will not ask password again for */
+    $remember_password = strtotime('+30 days'); // 30 days
+
+    if (isset($_POST['password']) && $_POST['password'] == $password) {
+        setcookie("password", $password, $remember_password);
+        header('Location: ' . $redirect_after_login);
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,15 +43,15 @@
     <!-- END OF BOOTSTRAP & STYLES -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-    $(function(){
-        $("#menu").load("./menu.html");
-    });
-</script>
-<script>
-    $(function(){
-        $("#footer").load("./footer.html");
-    });
- </script>
+        $(function(){
+            $("#menu").load("./menu.html");
+        });
+    </script>
+    <script>
+        $(function(){
+            $("#footer").load("./footer.html");
+        });
+    </script>
 </head>
 
 <body>
@@ -46,50 +63,20 @@
 
         <!-- PAGE HEADER -->
         <div id="page-header">
-        <div class="title-breadcrumbs">
-            <h1>ADMIN</h1>
-            <div class="thebreadcumb"></div>
-        </div>
+            <div class="title-breadcrumbs">
+                <h1>ADMIN</h1>
+                <div class="thebreadcumb"></div>
+            </div>
         </div>
 
     </div>
 
-    <?php
-        // Password protect this content
-        require_once('protect-this.php');
-    ?>
-
-    <?php
-        $db = new PDO("sqlite:database/busionoranzefunebri.db");
-        $q = "SELECT * FROM annuncio ORDER BY id DESC";
-        $prepare = $db->prepare($q);
-        $prepare->execute();
-        $annunci = $prepare->fetchAll();
-        $db = null;
-    ?>
-
-    <section class="services1">
-        <div class="row">
-            <div class="col-sm-12">
-
-                <!-- Caricamento annuncio -->
-                <?php
-                    if (isset($_GET['id'])) {
-                        $db = new PDO("sqlite:database/busionoranzefunebri.db");
-                        $q = "DELETE FROM annuncio WHERE id = :id";
-                        $prepare = $db->prepare($q);
-                        $prepare->bindValue(':id', $_GET['id']);
-                        $prepare->execute();
-                        $annuncio = $prepare->fetch();
-                        $db = null;
-                        header('Location: admin.php');
-                        die();
-                    }
-                ?>
-
-            </div>
-        </div>
-    </section>
+    <div style="text-align:center;margin-top:50px;">
+        Inserisci la password per procedere
+        <form method="POST">
+            <input type="text" name="password">
+        </form>
+    </div>
 
     <div class="spacing-45"></div>
 

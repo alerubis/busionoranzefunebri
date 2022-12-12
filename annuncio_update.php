@@ -54,6 +54,11 @@
 
     </div>
 
+    <?php
+        // Password protect this content
+        require_once('protect-this.php');
+    ?>
+
     <!-- Caricamento annuncio -->
     <?php
         if (isset($_GET['id'])) {
@@ -211,7 +216,7 @@
 
             </div>
         </div>
-    </section>
+    </div>
 
     <div class="spacing-45"></div>
 

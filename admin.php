@@ -55,6 +55,11 @@
     </div>
 
     <?php
+        // Password protect this content
+        require_once('protect-this.php');
+    ?>
+
+    <?php
         $db = new PDO("sqlite:database/busionoranzefunebri.db");
         $q = "SELECT * FROM annuncio ORDER BY id DESC";
         $prepare = $db->prepare($q);

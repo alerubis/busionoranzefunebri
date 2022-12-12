@@ -55,6 +55,11 @@
     </div>
 
     <?php
+        // Password protect this content
+        require_once('protect-this.php');
+    ?>
+
+    <?php
         if (isset($_POST['submit_data'])) {
             $db = new PDO("sqlite:database/busionoranzefunebri.db");
             $q = "INSERT INTO annuncio (nome,eta,paese,citazione,apertura,foto,testo,data) VALUES (:nome,:eta,:paese,:citazione,:apertura,:foto,:testo,:data)";
@@ -175,7 +180,7 @@
 
             </div>
         </div>
-    </section>
+    </div>
 
     <div class="spacing-45"></div>
 
