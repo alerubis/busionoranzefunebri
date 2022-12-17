@@ -78,7 +78,7 @@
             $prepare->execute();
             $annuncio = $prepare->fetch();
             $db = null;
-            // header('Location: admin.php');
+            header('Location: admin.php');
             die();
         }
 
