@@ -91,7 +91,12 @@
                 $prepare->bindValue(':foto', $fotoContent);
             }
             $prepare->bindValue(':testo', $_POST['testo']);
-            $prepare->bindValue(':data', $_POST['data']);
+            if (isset($_POST['data'])) {
+                $date = date_create($_POST['data']);
+                $prepare->bindValue(':data', date_format($date, "d/m/Y"));
+            } else {
+                $prepare->bindValue(':data', null);
+            }
             $prepare->execute();
             $annuncio = $prepare->fetch();
             $db = null;
@@ -149,10 +154,17 @@
                                     <input id="paese" name="paese" type="text" class="form-control" value="<?php echo $annuncio['paese'];?>">
                                 </p>
                             </div>
+                            <?php
+                                $data = null;
+                                if ($annuncio['data']) {
+                                    $dataFromDb = date_create_from_format("d/m/Y", $annuncio['data']);
+                                    $data = date_format($dataFromDb, "Y-m-d");
+                                }
+                            ?>
                             <div class="col-sm-3">
                                 <p>
                                     <label for="data">Data</label>
-                                    <input id="data" name="data" type="date" class="form-control" value="<?php echo $annuncio['data'];?>">
+                                    <input id="data" name="data" type="date" class="form-control" value="<?php echo $data;?>">
                                 </p>
                             </div>
                         </div>

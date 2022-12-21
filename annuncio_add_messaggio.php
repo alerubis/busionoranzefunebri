@@ -69,15 +69,30 @@
                         $prepare->bindValue(':cognome', $_POST['cognome']);
                         $prepare->bindValue(':email', $_POST['email']);
                         $prepare->bindValue(':testo', $_POST['testo']);
-                        $prepare->bindValue(':visibile', $_POST['visibile']);
-                        $prepare->bindValue(':data', date('Y-m-d'));
+                        $prepare->bindValue(':visibile', isset($_POST['visibile']) ? $_POST['visibile'] : null);
+                        $prepare->bindValue(':data', date('d/m/Y H:i'));
                         $prepare->execute();
                         $annuncio = $prepare->fetch();
                         $db = null;
-                        header('Location: annuncio.php?id='.$_GET['id']);
-                        die();
+                        // header('Location: annuncio.php?id='.$_GET['id']);
+                        // die();
                     }
                 ?>
+
+                <section class="introtext error404">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2>Messaggio inviato</h2>
+                            <hr class="small">
+                            <h5>
+                                <a href="annuncio.php?id=<?php echo $_GET['id']?>" title="">
+                                    <i class="fa fa-arrow-left" style="margin-right: 12px;"></i>
+                                    Torna all'annuncio
+                                </a>
+                            </h5>
+                        </div>
+                    </div>
+                </section>
 
             </div>
         </div>

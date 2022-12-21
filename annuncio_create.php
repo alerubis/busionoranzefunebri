@@ -74,7 +74,12 @@
                 $prepare->bindValue(':foto', $fotoContent);
             }
             $prepare->bindValue(':testo', $_POST['testo']);
-            $prepare->bindValue(':data', $_POST['data']);
+            if (isset($_POST['data'])) {
+                $date = date_create($_POST['data']);
+                $prepare->bindValue(':data', date_format($date, "d/m/Y"));
+            } else {
+                $prepare->bindValue(':data', null);
+            }
             $prepare->execute();
             $annuncio = $prepare->fetch();
             $db = null;

@@ -74,7 +74,7 @@
   <?php
     if (isset($_GET['id'])) {
       $db = new PDO("sqlite:database/busionoranzefunebri.db");
-      $q = "SELECT * FROM messaggio WHERE id_annuncio=:id AND visibile='si' ORDER BY data DESC";
+      $q = "SELECT * FROM messaggio WHERE id_annuncio=:id AND eliminato IS NULL AND visibile IS NULL ORDER BY data DESC";
       $prepare = $db->prepare($q);
       $prepare->bindValue(':id', $_GET['id']);
       $prepare->execute();

@@ -61,7 +61,7 @@
 
     <?php
         $db = new PDO("sqlite:database/busionoranzefunebri.db");
-        $q = "SELECT * FROM annuncio ORDER BY id DESC";
+        $q = "SELECT * FROM annuncio WHERE eliminato IS NULL ORDER BY id DESC";
         $prepare = $db->prepare($q);
         $prepare->execute();
         $annunci = $prepare->fetchAll();
@@ -115,6 +115,8 @@
                                 <td><?php echo $annuncio['testo']?></td>
                                 <td><?php echo $annuncio['data']?></td>
                                 <td>
+                                <a href="messaggi.php?id=<?php echo $annuncio['id'];?>">Messaggi</a>
+                                |
                                 <a href="annuncio_update.php?id=<?php echo $annuncio['id'];?>">Modifica</a>
                                 |
                                 <a href="annuncio_delete.php?id=<?php echo $annuncio['id'];?>" onclick="return confirm('Sei sicuro?');">Elimina</a>

@@ -63,17 +63,17 @@
         <div class="row">
             <div class="col-sm-12">
 
-                <!-- Caricamento annuncio -->
+                <!-- Caricamento messaggio -->
                 <?php
                     if (isset($_GET['id'])) {
                         $db = new PDO("sqlite:database/busionoranzefunebri.db");
-                        $q = "UPDATE annuncio SET eliminato = 1 WHERE id = :id";
+                        $q = "UPDATE messaggio SET eliminato = 1 WHERE id = :id";
                         $prepare = $db->prepare($q);
                         $prepare->bindValue(':id', $_GET['id']);
                         $prepare->execute();
-                        $annuncio = $prepare->fetch();
+                        $messaggio = $prepare->fetch();
                         $db = null;
-                        header('Location: admin.php');
+                        header('Location: messaggi.php?id='.$_GET['id_annuncio']);
                         die();
                     }
                 ?>

@@ -65,7 +65,7 @@
           <!-- Caricamento annunci -->
           <?php
             $db = new PDO("sqlite:database/busionoranzefunebri.db");
-            $q = "SELECT * FROM annuncio ORDER BY id DESC";
+            $q = "SELECT * FROM annuncio WHERE eliminato IS NULL ORDER BY id DESC";
             $prepare = $db->prepare($q);
             $prepare->execute();
             $annunci = $prepare->fetchAll();
