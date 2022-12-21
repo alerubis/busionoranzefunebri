@@ -60,7 +60,12 @@
 
                 <!-- Caricamento annuncio -->
                 <?php
-                    if (isset($_GET['id'])) {
+                    $isFormOk = isset($_GET['id']) &&
+                        isset($_POST['nome']) && $_POST['nome'] != '' &&
+                        isset($_POST['cognome']) && $_POST['cognome'] != '' &&
+                        isset($_POST['email']) && $_POST['email'] != '' &&
+                        isset($_POST['testo']) && $_POST['testo'] != '';
+                    if ($isFormOk) {
                         $db = new PDO("sqlite:database/busionoranzefunebri.db");
                         $q = "INSERT INTO messaggio (id_annuncio, nome, cognome, email, testo, visibile, data) VALUES (:id_annuncio, :nome, :cognome, :email, :testo, :visibile, :data)";
                         $prepare = $db->prepare($q);
@@ -79,20 +84,55 @@
                     }
                 ?>
 
-                <section class="introtext error404">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h2>Messaggio inviato</h2>
-                            <hr class="small">
-                            <h5>
-                                <a href="annuncio.php?id=<?php echo $_GET['id']?>" title="">
-                                    <i class="fa fa-arrow-left" style="margin-right: 12px;"></i>
-                                    Torna all'annuncio
-                                </a>
-                            </h5>
+                <?php if($isFormOk) : ?>
+
+                    <section class="introtext error404">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2>Messaggio inviato</h2>
+                                <hr class="small">
+                                <h5>
+                                    <a href="annuncio.php?id=<?php echo $_GET['id']?>" title="">
+                                        <i class="fa fa-arrow-left" style="margin-right: 12px;"></i>
+                                        Torna all'annuncio
+                                    </a>
+                                </h5>
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+
+                <?php else : ?>
+
+                    <section class="introtext error404">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2>Messaggio non inviato</h2>
+                                <hr class="small">
+                                <h5 style="text-align: center;">
+                                </h5>
+
+                                <h5>
+                                    Controlla di aver compilato i campi obbligatori:
+                                </h5>
+
+                                <div style="text-align: center;">Nome</div>
+                                <div style="text-align: center;">Cognome</div>
+                                <div style="text-align: center;">Email</div>
+                                <div style="text-align: center;">Messaggio</div>
+
+                                <br>
+
+                                <h5>
+                                    <a href="annuncio.php?id=<?php echo $_GET['id']?>" title="">
+                                        <i class="fa fa-arrow-left" style="margin-right: 12px;"></i>
+                                        Torna all'annuncio
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                    </section>
+
+                <?php endif; ?>
 
             </div>
         </div>
