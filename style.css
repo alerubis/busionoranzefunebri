@@ -1155,3 +1155,10 @@ section.footer {background:#666; padding:60px 0; overflow:visible;}
 @media (min-width: 1200px) {
     .col-lg-15 { width: 20%;  float: left; }
 }
+
+@media print {
+  @page { size: auto;  margin: 0mm; }
+  .non-stampare {
+    visibility: hidden;
+  }
+}

@@ -37,7 +37,7 @@
  </script>
 </head>
 
-<body>
+<body class="pagina-da-stampare">
 
     <!-- HEADER -->
     <div id="hw-hero">
@@ -131,9 +131,14 @@
 
                     <h4 style="text-align: center">
                         Messaggi
+                        <a href="messaggi_stampa.php?id=<?php echo $annuncio['id'];?>">
+                            <button style="margin-left: 12px">
+                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                            </button>
+                        </a>
                     </h4>
 
-                    <div class="table-responsive">
+                    <div class="table-responsive stampa-questo">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
