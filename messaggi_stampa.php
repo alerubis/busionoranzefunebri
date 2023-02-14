@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GoodGrowth - Financial Services HTML Template</title>
@@ -11,18 +12,80 @@
     <link href='https://fonts.googleapis.com/css?family=Lato:400,100,300,700,900&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <!-- END OF GOOGLE WEB FONTS -->
 
-    <!-- BOOTSTRAP & STYLES -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="css/block_grid_bootstrap.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/typicons.min.css" rel="stylesheet">
-    <link href="css/odometer-theme-default.css" rel="stylesheet">
-    <link href="css/animate-custom.css" rel="stylesheet">
-    <link href="css/owl.carousel.css" rel="stylesheet">
-    <link href="css/owl.theme.default.min.css" rel="stylesheet">
-    <link href="css/slicknav.min.css" rel="stylesheet">
+    <style>
+        @media print {
+            body{
+                width: 21cm;
+                height: 29.7cm;
+                margin: 0;
+                padding: 0;
+            }
+            .messaggio {
+                border: none !important;
+                margin: 0px !important;
+            }
+            .non-stampare {
+                position: absolute;
+            }
+        }
+        .messaggio {
+            page-break-after: always;
+            width: 21cm;
+            height: 29.7cm;
+            padding: 2.5cm;
+            margin: 24px;
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: stretch;
+        }
+        .messaggio:last-child {
+            page-break-after: avoid;
+        }
+        .bordo {
+            border-top: 4px dotted #1b673b;
+        }
+        .centro {
+            margin: 48px;
+        }
+        .apertura {
+            font-size: 200px;
+            margin-bottom: -150px;
+            color: #1b673b;
+        }
+        .nome {
+            font-size: 32px;
+            color: #1b673b;
+            margin: 0px 64px 0px 64px;
+        }
+        .testo {
+            font-size: 24px;
+            margin: 0px 64px 0px 64px;
+            white-space: pre-line;
+        }
+        .chiusura {
+            font-size: 200px;
+            text-align: right;
+            margin-top: -50px;
+            color: #1b673b;
+        }
+        .contatto {
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        .data {
+            font-size: 24px;
+            text-align: left;
+            margin-top: 8px;
+            font-style: italic;
+        }
+    </style>
+
     <link href="style.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -60,40 +123,49 @@
 
     <?php if($annuncio) : ?>
 
-        <?php foreach ($messaggi as $messaggio):?>
-            <div class="blog" style="padding: 24px;">
-                <article>
-                    <div class="post-content" style="text-align: center;">
-                        <p>
-                            <?php echo $messaggio['testo']?>
-                        </p>
-                        <div class="themeta">
-                            <span>
-                                <?php echo $messaggio['nome']?>
-                                <?php echo $messaggio['cognome']?>
-                            </span>
-                            <span>
-                                <?php
-                                    $data = null;
-                                    if ($messaggio['data']) {
-                                        $dataFromDb = date_create_from_format("d/m/Y H:i", $messaggio['data']);
-                                        $data = date_format($dataFromDb, "d/m/Y");
-                                    }
-                                ?>
-                                <?php echo $data?>
-                            </span>
-                        </div>
-                    </div>
-                </article>
-                <hr>
-            </div>
-        <?php endforeach;?>
-
-        <div style="text-align: center;">
-            <button class="non-stampare" onClick="window.print()">
+        <div class="non-stampare" style="width: 24cm; text-align: center; margin: 24px;">
+            <button onClick="window.print()" class="non-stampare">
                 <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                 Stampa
             </button>
+        </div>
+
+        <div class="messaggi">
+
+            <?php foreach ($messaggi as $messaggio):?>
+                <div class="messaggio">
+                    <div class="sopra">
+                        <div class="bordo"></div>
+                    </div>
+                    <div class="centro">
+                        <div class="apertura">“</div>
+                        <div class="nome">
+                            <?php echo $messaggio['nome']?>
+                            <?php echo $messaggio['cognome']?>
+                        </div>
+                        <div class="testo">
+                            <?php echo $messaggio['testo']?>
+                        </div>
+                        <div class="chiusura">”</div>
+                    </div>
+                    <div class="sotto">
+                        <div class="contatto">
+                            <?php echo $messaggio['email']?>
+                        </div>
+                        <div class="bordo"></div>
+                        <div class="data">
+                            <?php
+                                $data = null;
+                                if ($messaggio['data']) {
+                                    $dataFromDb = date_create_from_format("d/m/Y H:i", $messaggio['data']);
+                                    $data = date_format($dataFromDb, "d/m/Y");
+                                }
+                            ?>
+                            <?php echo $data?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach;?>
         </div>
 
     <?php else : ?>
@@ -110,8 +182,6 @@
         </section>
 
     <?php endif; ?>
-
-    <div class="spacing-45"></div>
 
     <!-- JAVASCRIPT FILES -->
     <script src="js/jquery.min.js"></script>
